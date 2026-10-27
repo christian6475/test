@@ -156,19 +156,14 @@ div[data-testid="stAlert"] {
 # Header
 # -------------------------
 #st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
-col_tag, col_menu = st.columns([1, 3], vertical_alignment="center")
+st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
 
-with col_tag:
-    st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
-
-with col_menu:
+with st.sidebar:
     page = st.radio(
         "Menu",
         ["Accueil", "Prédiction"],
-        horizontal=True,
         label_visibility="collapsed",
     )
-
 
 st.markdown("""
 <div class="hero">
