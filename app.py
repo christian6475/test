@@ -156,7 +156,7 @@ div[data-testid="stAlert"] {
 # Header
 # -------------------------
 #st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
-col_tag, col_menu = st.columns([3, 2], vertical_alignment="center")
+col_tag, col_menu = st.columns([1, 3], vertical_alignment="center")
 
 with col_tag:
     st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
