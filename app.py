@@ -23,10 +23,14 @@ st.markdown("""
 
 .top-tag {
     color: #53e0c1;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 1px;
     margin-bottom: 18px;
+    display: inline-block;
+    border: 2px solid #53e0c1;
+    border-radius: 8px;
+    padding: 6px 16px;
 }
 
 .block-container {
