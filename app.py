@@ -21,7 +21,6 @@ st.markdown("""
     color: #edf4ff;
 }
 
-st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
 
 .block-container {
     max-width: 1250px;
