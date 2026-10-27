@@ -165,6 +165,13 @@ with st.sidebar:
         label_visibility="collapsed",
     )
 
+
+if page == "Prédiction":
+    st.title("Prédiction")
+    st.info("Cette page sera complétée prochainement.")
+    st.stop()
+
+
 st.markdown("""
 <div class="hero">
     <div class="eyebrow">FINANCIAL DATA ANALYTICS</div>
