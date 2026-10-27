@@ -21,6 +21,13 @@ st.markdown("""
     color: #edf4ff;
 }
 
+.top-tag {
+    color: #53e0c1;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
 
 .block-container {
     max-width: 1250px;
@@ -144,6 +151,7 @@ div[data-testid="stAlert"] {
 # -------------------------
 # Header
 # -------------------------
+st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="hero">
     <div class="eyebrow">FINANCIAL DATA ANALYTICS</div>
