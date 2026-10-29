@@ -177,7 +177,7 @@ div[data-testid="stAlert"] {
 
 st.markdown("""
 <div class="top-bar">
-    <div class="top-tag">Virtual Internship</div>
+    <div class="top-tag">Virtual Internship 2026</div>
     <div class="author">Created by<br><b>Christian Fanevasoa</b></div>
 </div>
 """, unsafe_allow_html=True)
