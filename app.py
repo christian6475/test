@@ -33,6 +33,25 @@ st.markdown("""
     padding: 6px 16px;
 }
 
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.author {
+    color: #b9c7dc;
+    font-size: 0.95rem;
+    text-align: right;
+    line-height: 1.5;
+}
+
+.author b {
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+
 .block-container {
     max-width: 1250px;
     padding-top: 2.5rem;
@@ -156,7 +175,13 @@ div[data-testid="stAlert"] {
 # Header
 # -------------------------
 
-st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="top-bar">
+    <div class="top-tag">Virtual Internship</div>
+    <div class="author">Created by<br><b>Christian Fanevasoa</b></div>
+</div>
+""", unsafe_allow_html=True)
+
 
 with st.sidebar:
     page = st.radio(
