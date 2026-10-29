@@ -192,11 +192,65 @@ with st.sidebar:
 
 
 if page == "Prediction":
-    st.title("Prediction")
-    st.info("This page will be completed soon.")
+
+    @st.cache_data(ttl=900)
+    def load_prices(period):
+        data = yf.download(
+            "TSLA",
+            period=period,
+            interval="1d",
+            auto_adjust=False,
+            progress=False
+        )
+        if data.empty:
+            return None
+        close = data["Close"]
+        if isinstance(close, pd.DataFrame):
+            close = close.iloc[:, 0]
+        return close.dropna()
+
+    st.markdown(
+        '<div class="section-heading">TSLA Price</div>',
+        unsafe_allow_html=True
+    )
+
+    period = st.selectbox(
+        "History period",
+        ["1mo", "3mo", "6mo", "1y", "2y", "5y"],
+        index=3
+    )
+
+    close = load_prices(period)
+
+    if close is None or close.empty:
+        st.error("No data could be downloaded. Please try again later.")
+        st.stop()
+
+    latest_price = float(close.iloc[-1])
+    previous_price = float(close.iloc[-2])
+    change = latest_price - previous_price
+    change_pct = change / previous_price * 100
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric(
+            "Latest price",
+            f"${latest_price:.2f}",
+            f"{change:+.2f} ({change_pct:+.2f}%)"
+        )
+
+    with col2:
+        st.metric("Date", close.index[-1].strftime("%Y-%m-%d"))
+
+    st.markdown(
+        '<div class="section-heading">Historical Price</div>',
+        unsafe_allow_html=True
+    )
+
+    st.line_chart(close.rename("Closing Price"))
+
     st.stop()
-
-
 st.markdown("""
 <div class="hero">
     <div class="eyebrow">FINANCIAL DATA ANALYTICS</div>
