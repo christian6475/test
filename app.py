@@ -186,14 +186,14 @@ st.markdown("""
 with st.sidebar:
     page = st.radio(
         "Menu",
-        ["Accueil", "Prédiction"],
-        label_visibility="collapsed",
+        ["Home", "Prediction"],
+        label_visibility="expanded",
     )
 
 
-if page == "Prédiction":
-    st.title("Prédiction")
-    st.info("Cette page sera complétée prochainement.")
+if page == "Prediction":
+    st.title("Prediction")
+    st.info("This page will be completed soon.")
     st.stop()
 
 
