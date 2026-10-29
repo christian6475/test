@@ -235,13 +235,13 @@ if page == "Prediction":
 
     with col1:
         st.metric(
-            "Latest price",
+            "Latest available price",
             f"${latest_price:.2f}",
             f"{change:+.2f} ({change_pct:+.2f}%)"
         )
 
     with col2:
-        st.metric("Date", close.index[-1].strftime("%Y-%m-%d"))
+        st.metric("Market date (New York)", close.index[-1].strftime("%Y-%m-%d"))
 
     st.markdown(
         '<div class="section-heading">Historical Price</div>',
