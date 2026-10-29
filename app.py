@@ -210,6 +210,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+
+
 # -------------------------
 # Project overview
 # -------------------------
@@ -219,53 +221,45 @@ st.markdown(
 )
 
 st.markdown(
-    '<div class="section-description">'
-    'Explore the forecasting methods planned for this project.'
-    '</div>',
-    unsafe_allow_html=True
+    "This project is a three-month pilot that monitors daily forecasts of "
+    "Tesla (TSLA) closing prices. Each day, three models forecast the next "
+    "10 trading days. Every forecast is recorded and later compared with the "
+    "actual closing prices, so we can measure how reliable each model is "
+    "over time."
 )
 
+st.markdown("**1. Naive Forecast (benchmark)**")
+st.markdown(
+    "The simplest possible forecast: it assumes that every future closing "
+    "price will be equal to the latest observed closing price. It needs no "
+    "training and serves as the reference point. A more complex model is "
+    "only useful if it performs better than this one."
+)
 
-# -------------------------
-# Model cards
-# -------------------------
-col1, col2, col3 = st.columns(3, gap="medium")
+st.markdown("**2. Random Forest**")
+st.markdown(
+    "An ensemble method that builds many decision trees, each trained on a "
+    "different random sample of the historical data, and averages their "
+    "predictions. Averaging reduces the risk of overfitting and allows the "
+    "model to capture non-linear relationships between past market "
+    "behaviour and future prices."
+)
 
-with col1:
-    st.markdown("""
-    <div class="model-card">
-        <div class="model-number">MODEL 01</div>
-        <div class="model-title">Naive Forecast</div>
-        <div class="model-description">
-            A simple benchmark that uses the latest observed closing
-            price as the forecast for future trading days.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("**3. XGBoost**")
+st.markdown(
+    "A gradient boosting method that builds trees one after another. Each "
+    "new tree focuses on correcting the errors left by the previous ones, "
+    "which often gives high accuracy. It is more sensitive to its settings "
+    "than Random Forest and needs careful tuning."
+)
 
-with col2:
-    st.markdown("""
-    <div class="model-card">
-        <div class="model-number">MODEL 02</div>
-        <div class="model-title">Random Forest</div>
-        <div class="model-description">
-            An ensemble of decision trees that can learn relationships
-            between historical market features and future prices.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("**How the models are compared**")
+st.markdown(
+    "All three models forecast the same trading days using the same data. "
+    "Their forecasts are compared with the actual prices using error "
+    "metrics (MAE, RMSE and MAPE): the lower the error, the better the model."
+)
 
-with col3:
-    st.markdown("""
-    <div class="model-card">
-        <div class="model-number">MODEL 03</div>
-        <div class="model-title">XGBoost</div>
-        <div class="model-description">
-            A gradient boosting method that builds trees sequentially
-            to improve predictive performance.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
 
 
 # -------------------------
