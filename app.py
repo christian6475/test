@@ -8,7 +8,7 @@ st.set_page_config(
     page_title="TSLA | Forecasting Dashboard",
     page_icon="📈",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # -------------------------
@@ -155,7 +155,7 @@ div[data-testid="stAlert"] {
 # -------------------------
 # Header
 # -------------------------
-#st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
+
 st.markdown('<div class="top-tag">Virtual Internship</div>', unsafe_allow_html=True)
 
 with st.sidebar:
@@ -265,21 +265,10 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.info(
-    "The interface is ready for the next stage. Historical market data, "
-    "model training, forecasts, and performance metrics have not yet "
-    "been connected."
-)
 
 
-# -------------------------
-# Footer
-# -------------------------
-st.markdown("""
-<div class="footer">
-    TSLA FORECASTING DASHBOARD · DEVELOPMENT VERSION
-</div>
-""", unsafe_allow_html=True)
+
+
 
 
 # -------------------------
@@ -343,5 +332,15 @@ if st.button("Load latest TSLA data"):
         table.index.name = "Date"
         st.dataframe(
             table.style.format("${:.2f}"),
-            use_container_width=True
+            width="stretch"
         )
+
+
+# -------------------------
+# Footer
+# -------------------------
+st.markdown("""
+<div class="footer">
+    TSLA FORECASTING DASHBOARD · DEVELOPMENT VERSION
+</div>
+""", unsafe_allow_html=True)
