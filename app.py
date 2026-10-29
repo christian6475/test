@@ -187,7 +187,7 @@ with st.sidebar:
     page = st.radio(
         "Menu",
         ["Home", "Prediction"],
-        label_visibility="expanded",
+        label_visibility="collapsed",
     )
 
 
