@@ -250,7 +250,54 @@ if page == "Prediction":
 
     st.line_chart(close.rename("Closing Price"))
 
+
+
+
+
+        st.markdown(
+        '<div class="section-heading">Forecast: next 10 trading days</div>',
+        unsafe_allow_html=True
+    )
+
+    try:
+        log = pd.read_csv("data/forecast_log.csv")
+    except FileNotFoundError:
+        st.info("The forecast journal is not available yet.")
+        st.stop()
+
+    last_origin = log["origin_date"].max()
+    latest = log[log["origin_date"] == last_origin]
+
+    st.caption(f"Forecast made from the closing price of {last_origin}.")
+
+    forecast_table = latest.pivot(
+        index="target_date_est",
+        columns="model",
+        values="predicted_price"
+    )[["Naive", "Random Forest", "XGBoost"]]
+    forecast_table.index = pd.to_datetime(forecast_table.index)
+
+    history = close.tail(60).rename("Historical").to_frame()
+    st.line_chart(pd.concat([history, forecast_table]))
+
+    display_table = forecast_table.copy()
+    display_table.index = display_table.index.strftime("%Y-%m-%d")
+    display_table.index.name = "Date"
+    st.dataframe(
+        display_table.style.format("${:.2f}"),
+        width="stretch"
+    )
+
+
+    
+
+
+    
     st.stop()
+
+
+
+
 st.markdown("""
 <div class="hero">
     <div class="eyebrow">FINANCIAL DATA ANALYTICS</div>
