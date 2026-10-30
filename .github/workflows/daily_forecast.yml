@@ -1,0 +1,47 @@
+name: Daily TSLA forecast
+
+on:
+  schedule:
+    # 22:00 UTC, Monday to Friday: after the New York close in summer and winter time
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch:   # lets you start it by hand from the Actions tab
+
+permissions:
+  contents: write      # needed to save the journal in the repository
+
+concurrency:
+  group: daily-forecast
+  cancel-in-progress: false
+
+jobs:
+  update-journal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Get the repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-forecast.txt
+
+      - name: Install libraries
+        run: pip install -r requirements-forecast.txt
+
+      - name: Update the forecast journal
+        run: python daily_update.py
+
+      - name: Save the journal in the repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/forecast_log.csv
+          if git diff --staged --quiet; then
+            echo "No change to save"
+          else
+            git commit -m "Update forecast journal $(date -u +%Y-%m-%d)"
+            git push
+          fi
