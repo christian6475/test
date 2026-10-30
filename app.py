@@ -252,9 +252,7 @@ if page == "Prediction":
 
 
 
-
-
-        st.markdown(
+    st.markdown(
         '<div class="section-heading">Forecast: next 10 trading days</div>',
         unsafe_allow_html=True
     )
@@ -287,9 +285,6 @@ if page == "Prediction":
         display_table.style.format("${:.2f}"),
         width="stretch"
     )
-
-
-    
 
 
     
