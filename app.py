@@ -337,44 +337,19 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 st.markdown(
-    "This project is a three-month pilot that monitors daily forecasts of "
-    "Tesla (TSLA) closing prices. Each day, three models forecast the next "
-    "10 trading days. Every forecast is recorded and later compared with the "
-    "actual closing prices, so we can measure how reliable each model is "
-    "over time."
+    "The general objective is to build a reliable model that forecasts "
+    "Tesla (TSLA) closing prices over the next three months. As a first "
+    "stage, the project forecasts the next 10 trading days, every day, "
+    "and tests how each model performs against the actual prices."
 )
 
-st.markdown("**1. Naive Forecast (benchmark)**")
 st.markdown(
-    "The simplest possible forecast: it assumes that every future closing "
-    "price will be equal to the latest observed closing price. It needs no "
-    "training and serves as the reference point. A more complex model is "
-    "only useful if it performs better than this one."
-)
-
-st.markdown("**2. Random Forest**")
-st.markdown(
-    "An ensemble method that builds many decision trees, each trained on a "
-    "different random sample of the historical data, and averages their "
-    "predictions. Averaging reduces the risk of overfitting and allows the "
-    "model to capture non-linear relationships between past market "
-    "behaviour and future prices."
-)
-
-st.markdown("**3. XGBoost**")
-st.markdown(
-    "A gradient boosting method that builds trees one after another. Each "
-    "new tree focuses on correcting the errors left by the previous ones, "
-    "which often gives high accuracy. It is more sensitive to its settings "
-    "than Random Forest and needs careful tuning."
-)
-
-st.markdown("**How the models are compared**")
-st.markdown(
-    "All three models forecast the same trading days using the same data. "
-    "Their forecasts are compared with the actual prices using error "
-    "metrics (MAE, RMSE and MAPE): the lower the error, the better the model."
+    "During the three-month pilot, every daily forecast is recorded and "
+    "later compared with the actual closing price. This gives a "
+    "time-ordered record of how each model performs, and shows which one "
+    "is worth improving."
 )
 
 
