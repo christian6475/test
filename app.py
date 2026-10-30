@@ -1,4 +1,4 @@
-
+import altair as alt
 import streamlit as st
 import yfinance as yf
 import pandas as pd
@@ -276,7 +276,28 @@ if page == "Prediction":
     forecast_table.index = pd.to_datetime(forecast_table.index)
 
     history = close.tail(60).rename("Historical").to_frame()
-    st.line_chart(pd.concat([history, forecast_table]))
+
+
+    chart_df = (
+        pd.concat([history, forecast_table])
+        .rename_axis("Date")
+        .reset_index()
+        .melt("Date", var_name="Series", value_name="Price")
+        .dropna()
+    )
+
+    zoom_chart = (
+        alt.Chart(chart_df)
+        .mark_line()
+        .encode(
+            x="Date:T",
+            y=alt.Y("Price:Q", scale=alt.Scale(zero=False)),
+            color="Series:N",
+        )
+    )
+    st.altair_chart(zoom_chart, width="stretch")
+
+    
 
     display_table = forecast_table.copy()
     display_table.index = display_table.index.strftime("%Y-%m-%d")
