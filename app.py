@@ -333,7 +333,7 @@ st.markdown("""
 # Project overview
 # -------------------------
 st.markdown(
-    '<div class="section-heading">Project Overview</div>',
+    '<div class="section-heading"> Objective </div>',
     unsafe_allow_html=True
 )
 
