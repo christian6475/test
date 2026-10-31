@@ -186,7 +186,7 @@ st.markdown("""
 with st.sidebar:
     page = st.radio(
         "Menu",
-        ["Home", "Prediction"],
+        ["Home", "Prediction", "Performance"],
         label_visibility="collapsed",
     )
 
