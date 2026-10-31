@@ -313,9 +313,81 @@ if page == "Prediction":
 
 
 if page == "Performance":
-    st.title("Performance")
-    st.info("This page will be completed soon.")
+    st.markdown(
+        '<div class="section-heading">Model Performance</div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        "Each recorded forecast is compared with the actual closing price "
+        "once that price is known. Lower errors are better."
+    )
+
+    try:
+        log = pd.read_csv("data/forecast_log.csv")
+    except FileNotFoundError:
+        st.info("The forecast journal is not available yet.")
+        st.stop()
+
+    evaluated = log.dropna(subset=["actual_price"])
+
+    n_eval = 0
+    if not evaluated.empty:
+        n_eval = int(evaluated.groupby("model").size().min())
+
+    col1, col2 = st.columns(2)
+    col1.metric("Forecast days recorded", log["origin_date"].nunique())
+    col2.metric("Evaluated forecasts per model", n_eval)
+
+    if evaluated.empty:
+        st.info(
+            "No real prices are available yet. The first results appear "
+            "after the next trading day."
+        )
+        st.stop()
+
+    if n_eval < 20:
+        st.warning(
+            "Very few forecasts have been evaluated so far. "
+            "Do not draw conclusions yet."
+        )
+
+    summary = evaluated.groupby("model").agg(
+        Predictions=("abs_error", "size"),
+        **{
+            "MAE ($)": ("abs_error", "mean"),
+            "RMSE ($)": ("abs_error", lambda s: (s ** 2).mean() ** 0.5),
+            "MAPE (%)": ("pct_error", "mean"),
+        }
+    )
+    order = ["Naive", "Random Forest", "XGBoost"]
+    summary = summary.reindex([m for m in order if m in summary.index])
+
+    st.dataframe(
+        summary.style
+        .format({
+            "Predictions": "{:d}",
+            "MAE ($)": "{:.2f}",
+            "RMSE ($)": "{:.2f}",
+            "MAPE (%)": "{:.2f}",
+        })
+        .highlight_min(
+            subset=["MAE ($)", "RMSE ($)", "MAPE (%)"],
+            color="#1f6f5c"
+        ),
+        width="stretch"
+    )
+
+    st.caption(
+        "MAE: average error in dollars. RMSE: like MAE but penalises large "
+        "errors more. MAPE: average error in percent of the actual price. "
+        "The best value in each column is highlighted."
+    )
+
     st.stop()
+
+
+
+
 
 st.markdown("""
 <div class="hero">
