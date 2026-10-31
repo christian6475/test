@@ -312,7 +312,10 @@ if page == "Prediction":
     st.stop()
 
 
-
+if page == "Performance":
+    st.title("Performance")
+    st.info("This page will be completed soon.")
+    st.stop()
 
 st.markdown("""
 <div class="hero">
