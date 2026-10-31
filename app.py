@@ -52,6 +52,41 @@ st.markdown("""
 }
 
 
+section[data-testid="stSidebar"] {
+    background: #0e1728;
+    border-right: 1px solid #26364d;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] {
+    gap: 10px;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label {
+    background: #142137;
+    border: 1px solid #293b55;
+    border-radius: 12px;
+    padding: 14px 18px;
+    width: 100%;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+    border-color: #53e0c1;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #edf4ff;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
+    background: linear-gradient(120deg, #142943, #123b49);
+    border-color: #53e0c1;
+}
+
+
+
+
 .block-container {
     max-width: 1250px;
     padding-top: 4.5rem;
