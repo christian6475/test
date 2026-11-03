@@ -12,6 +12,13 @@ header[data-testid="stHeader"] {
     visibility: hidden;
     height: 0%;
 }
+
+/* Masquer le bouton flottant "Manage app" en bas à droite */
+div[data-testid="stStatusWidget"] {
+    visibility: hidden;
+    display: none;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
