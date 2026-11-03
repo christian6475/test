@@ -13,9 +13,14 @@ header[data-testid="stHeader"] {
     height: 0%;
 }
 
-/* Masquer le bouton flottant "Manage app" en bas à droite */
+/* Masquer le widget de statut / bouton de gestion en bas à droite */
 div[data-testid="stStatusWidget"] {
     visibility: hidden;
+    display: none;
+}
+
+/* Masquer le conteneur flottant de gestion si présent */
+.stAppDeployButton {
     display: none;
 }
 </style>
