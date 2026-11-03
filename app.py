@@ -4,6 +4,19 @@ import yfinance as yf
 import pandas as pd
 
 
+
+st.markdown("""
+<style>
+/* Masquer la barre supérieure (logo GitHub, bouton Share, menu) */
+header[data-testid="stHeader"] {
+    visibility: hidden;
+    height: 0%;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+
 st.set_page_config(
     page_title="TSLA | Forecasting Dashboard",
     page_icon="📈",
