@@ -18,7 +18,6 @@ div[data-testid="stStatusWidget"] {
     visibility: hidden;
     display: none;
 }
-
 </style>
 """, unsafe_allow_html=True)
 
