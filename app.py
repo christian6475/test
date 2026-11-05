@@ -423,6 +423,56 @@ if page == "Performance":
         "The best value in each column is highlighted."
     )
 
+
+
+    st.markdown(
+        '<div class="section-heading">Real Price vs Predictions</div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        "For each date with a known real price, the table shows what each "
+        "model had predicted for that date, some trading days earlier."
+    )
+
+    horizon_choice = st.selectbox(
+        "Prediction made this many trading days before the date",
+        list(range(1, 11)),
+        index=0
+    )
+
+    subset = evaluated[evaluated["horizon"] == horizon_choice]
+
+    if subset.empty:
+        st.info("No real price is available yet for this horizon.")
+    else:
+        compare = subset.pivot_table(
+            index="actual_date",
+            columns="model",
+            values="predicted_price",
+            aggfunc="first"
+        )
+        compare["Real price"] = (
+            subset.groupby("actual_date")["actual_price"].first()
+        )
+        order = ["Real price", "Naive", "XGBoost", "Random Forest"]
+        compare = compare[[c for c in order if c in compare.columns]]
+        compare = compare.sort_index(ascending=False)
+        compare.index.name = "Date"
+
+        st.dataframe(
+            compare.style.format("${:.2f}"),
+            width="stretch"
+        )
+
+        st.download_button(
+            "Download this table (CSV)",
+            compare.round(2).to_csv().encode("utf-8"),
+            file_name="real_vs_predictions.csv",
+            mime="text/csv"
+        )
+
+    
+    
     st.stop()
 
 
