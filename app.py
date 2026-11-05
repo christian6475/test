@@ -5,26 +5,7 @@ import pandas as pd
 
 
 
-st.markdown("""
-<style>
-/* Masquer la barre supérieure (logo GitHub, bouton Share, menu) */
-header[data-testid="stHeader"] {
-    visibility: hidden;
-    height: 0%;
-}
 
-/* Masquer le widget de statut / bouton de gestion en bas à droite */
-div[data-testid="stStatusWidget"] {
-    visibility: hidden;
-    display: none;
-}
-
-/* Masquer le conteneur flottant de gestion si présent */
-.stAppDeployButton {
-    display: none;
-}
-</style>
-""", unsafe_allow_html=True)
 
 
 
