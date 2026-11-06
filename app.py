@@ -339,14 +339,45 @@ if page == "Prediction":
 
     
 
-    display_table = forecast_table.copy()
-    display_table.index = display_table.index.strftime("%Y-%m-%d")
-    display_table.index.name = "Date"
+    recent = log.dropna(subset=["actual_price"])
+    recent = recent[recent["horizon"] == 1]
+
+    if recent.empty:
+        past = pd.DataFrame(
+            columns=["Real price", "XGBoost", "Random Forest"],
+            dtype=float
+        )
+        past.index = pd.to_datetime(past.index)
+    else:
+        past = recent.pivot_table(
+            index="actual_date",
+            columns="model",
+            values="predicted_price",
+            aggfunc="first"
+        )
+        past["Real price"] = (
+            recent.groupby("actual_date")["actual_price"].first()
+        )
+        past.index = pd.to_datetime(past.index)
+
+    future = forecast_table.copy()
+    future["Real price"] = float("nan")
+
+    combined = pd.concat([past, future])
+    combined = combined[~combined.index.duplicated(keep="first")]
+    combined = combined[["Real price", "XGBoost", "Random Forest"]]
+    combined = combined.sort_index(ascending=False)
+    combined.index = combined.index.strftime("%Y-%m-%d")
+    combined.index.name = "Date"
+
     st.dataframe(
-        display_table.style.format("${:.2f}"),
+        combined.style.format("${:.2f}", na_rep="—"),
         width="stretch"
     )
-
+    st.caption(
+        "Past dates: real closing price and the prediction made one trading "
+        "day earlier. Future dates: latest forecast, real price not known yet."
+    )
 
     
     st.stop()
