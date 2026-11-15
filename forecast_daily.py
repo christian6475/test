@@ -20,17 +20,17 @@ START = "2016-01-01"
 HORIZON = 10
 RANDOM_STATE = 42
 
-# Best Optuna parameters found in the notebook (tuned with a 5-day target)
+
+# Target is trained in percent (x100) so that gamma does not block the trees
 XGB_PARAMS = {
-    "n_estimators": 600,
+    "n_estimators": 300,
     "max_depth": 3,
-    "learning_rate": 0.09575921394871639,
+    "learning_rate": 0.03,
     "min_child_weight": 20,
-    "subsample": 0.6976353016281769,
-    "colsample_bytree": 0.761988580619456,
-    "gamma": 1.3218293415157272,
-    "reg_alpha": 0.00011645046010590423,
-    "reg_lambda": 0.18436435780078145,
+    "subsample": 0.7,
+    "colsample_bytree": 0.7,
+    "gamma": 0.0,
+    "reg_lambda": 5.0,
     "objective": "reg:squarederror",
     "random_state": RANDOM_STATE,
     "n_jobs": -1,
@@ -155,9 +155,9 @@ def make_forecast(df=None):
 
         predictions = {"Naive": last_price}
 
-        xgb_model = XGBRegressor(**XGB_PARAMS).fit(X, y)
+        xgb_model = XGBRegressor(**XGB_PARAMS).fit(X, y * 100)
         predictions["XGBoost"] = last_price * float(
-            np.exp(xgb_model.predict(latest[features])[0])
+            np.exp(xgb_model.predict(latest[features])[0] / 100)
         )
 
         rf_model = RandomForestRegressor(**RF_PARAMS).fit(X, y)
