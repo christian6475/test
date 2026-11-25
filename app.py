@@ -6,9 +6,6 @@ import pandas as pd
 
 
 
-
-
-
 st.set_page_config(
     page_title="TSLA | Forecasting Dashboard",
     page_icon="📈",
@@ -326,16 +323,18 @@ if page == "Prediction":
         .dropna()
     )
 
- #   zoom_chart = (
-  #      alt.Chart(chart_df)
-  #      .mark_line()
-  #      .encode(
-  #          x="Date:T",
-  #          y=alt.Y("Price:Q", scale=alt.Scale(zero=False)),
-  #          color="Series:N",
-  #      )
-  #  )
-  #  st.altair_chart(zoom_chart, width="stretch")
+    zoom_chart = (
+        alt.Chart(chart_df)
+        .mark_line()
+        .encode(
+            x="Date:T",
+            y=alt.Y("Price:Q", scale=alt.Scale(zero=False)),
+            color="Series:N",
+            tooltip=["Date:T", "Series:N", alt.Tooltip("Price:Q", format="$.2f")],
+        )
+        .interactive()
+    )
+    st.altair_chart(zoom_chart, width="stretch")
 
     
 
