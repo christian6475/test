@@ -359,13 +359,18 @@ if page == "Prediction":
         )
         past.index = pd.to_datetime(past.index)
 
-    future = forecast_table.copy()
-    future["Real price"] = float("nan")
+    # future = forecast_table.copy()
+    # future["Real price"] = float("nan")
 
-    combined = pd.concat([past, future])
-    combined = combined[~combined.index.duplicated(keep="first")]
-    combined = combined[["Real price", "XGBoost", "Random Forest"]]
-    combined = combined.sort_index(ascending=False)
+    # combined = pd.concat([past, future])
+    # combined = combined[~combined.index.duplicated(keep="first")]
+    # combined = combined[["Real price", "XGBoost", "Random Forest"]]
+    # combined = combined.sort_index(ascending=False)
+    # combined.index = combined.index.strftime("%Y-%m-%d")
+    # combined.index.name = "Date"
+
+    combined = forecast_table[["XGBoost", "Random Forest"]].copy()
+    combined = combined.sort_index()
     combined.index = combined.index.strftime("%Y-%m-%d")
     combined.index.name = "Date"
 
