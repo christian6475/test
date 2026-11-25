@@ -259,7 +259,7 @@ if page == "Prediction":
 
     close = load_prices(period)
 
-    if close is None or close.empty:
+    if close is None or len(close) < 2:
         st.error("No data could be downloaded. Please try again later.")
         st.stop()
 
