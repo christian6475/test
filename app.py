@@ -18,8 +18,14 @@ st.set_page_config(
 # -------------------------
 st.markdown("""
 <style>
+
+# .stApp {
+#     background: linear-gradient(145deg, #0b1220 0%, #101b30 55%, #0b1220 100%);
+#     color: #edf4ff;
+# }
+
 .stApp {
-    background: linear-gradient(145deg, #0b1220 0%, #101b30 55%, #0b1220 100%);
+    background: linear-gradient(145deg, #05080f 0%, #0a1018 55%, #05080f 100%);
     color: #edf4ff;
 }
 
