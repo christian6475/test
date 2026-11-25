@@ -11,7 +11,7 @@ st.set_page_config(
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded"
-)
+) 
 
 # -------------------------
 # Custom CSS
@@ -331,7 +331,14 @@ if page == "Prediction":
         .encode(
             x="Date:T",
             y=alt.Y("Price:Q", scale=alt.Scale(zero=False)),
-            color="Series:N",
+            # color="Series:N",
+            color=alt.Color(
+                "Series:N",
+                scale=alt.Scale(
+                    domain=["Historical", "Naive", "Random Forest", "XGBoost"],
+                    range=["#9fb0c8", "#8294ae", "#f5b942", "#53e0c1"],
+                ),
+            ),
             tooltip=["Date:T", "Series:N", alt.Tooltip("Price:Q", format="$.2f")],
         )
         .interactive()
