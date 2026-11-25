@@ -378,9 +378,17 @@ if page == "Prediction":
         combined.style.format("${:.2f}", na_rep="—"),
         width="stretch"
     )
+
+    
+    # st.caption(
+    #     "Past dates: real closing price and the prediction made one trading "
+    #     "day earlier. Future dates: latest forecast, real price not known yet."
+    # )
+
+
     st.caption(
-        "Past dates: real closing price and the prediction made one trading "
-        "day earlier. Future dates: latest forecast, real price not known yet."
+        "Latest forecast for the next 10 trading days. "
+        "Past results are in the Performance page."
     )
 
     
