@@ -25,8 +25,8 @@ st.markdown("""
 # }
 
 .stApp {
-    background: linear-gradient(145deg, #12101f 0%, #1b1740 55%, #12101f 100%);
-    color: #edf4ff;
+    background: linear-gradient(145deg, #f4f7fb 0%, #e9eff7 100%);
+    color: #14213d;
 }
 
 .top-tag {
