@@ -244,18 +244,36 @@ if page == "Prediction":
     @st.cache_data(ttl=900)
     def load_prices(period):
         data = yf.download(
-            "TSLA",
-            period=period,
-            interval="1d",
-            auto_adjust=False,
-            progress=False
-        )
+        "TSLA",
+        period=period,
+        interval="1d",
+        auto_adjust=False,
+        progress=False,
+    )
         if data.empty:
             return None
-        close = data["Close"]
-        if isinstance(close, pd.DataFrame):
-            close = close.iloc[:, 0]
-        return close.dropna()
+
+        col_name = "Adj Close" if "Adj Close" in data.columns else "Close"
+        series = data[col_name]
+        if isinstance(series, pd.DataFrame):
+            series = series.iloc[:, 0]
+        return series.dropna()
+
+    # @st.cache_data(ttl=900)
+    # def load_prices(period):
+    #     data = yf.download(
+    #         "TSLA",
+    #         period=period,
+    #         interval="1d",
+    #         auto_adjust=False,
+    #         progress=False
+    #     )
+    #     if data.empty:
+    #         return None
+    #     close = data["Close"]
+    #     if isinstance(close, pd.DataFrame):
+    #         close = close.iloc[:, 0]
+    #     return close.dropna()
 
     st.markdown(
         '<div class="section-heading">TSLA Price</div>',
