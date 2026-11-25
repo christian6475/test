@@ -19,15 +19,11 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-# .stApp {
-#     background: linear-gradient(145deg, #0b1220 0%, #101b30 55%, #0b1220 100%);
-#     color: #edf4ff;
-# }
-
 .stApp {
-    background: linear-gradient(145deg, #1e6fb8 0%, #3a9ad9 55%, #1e6fb8 100%);
-    color: #ffffff;
+    background: linear-gradient(145deg, #0b1220 0%, #101b30 55%, #0b1220 100%);
+    color: #edf4ff;
 }
+
 
 .top-tag {
     color: #53e0c1;
