@@ -352,7 +352,7 @@ if page == "Prediction":
         )
         .interactive()
     )
-    st.altair_chart(zoom_chart, width="stretch")
+    st.altair_chart(zoom_chart, )
 
     
 
@@ -394,12 +394,12 @@ if page == "Prediction":
 
     # st.dataframe(
     #     combined.style.format("${:.2f}", na_rep="—"),
-    #     width="stretch"
+    #     
     # )
 
     st.dataframe(
         combined.style.format("${:.2f}", na_rep="—"),
-        width="stretch",
+        ,
         column_config=centered_config(combined)
     )
 
@@ -529,7 +529,8 @@ if page == "Performance":
 
         st.dataframe(
             compare.style.format("${:.2f}"),
-            width="stretch"
+            width="stretch",
+            column_config=centered_config(compare)
         )
 
         st.download_button(
