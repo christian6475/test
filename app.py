@@ -399,7 +399,6 @@ if page == "Prediction":
 
     st.dataframe(
         combined.style.format("${:.2f}", na_rep="—"),
-        ,
         column_config=centered_config(combined)
     )
 
