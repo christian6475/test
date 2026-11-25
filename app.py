@@ -314,7 +314,7 @@ if page == "Prediction":
         unsafe_allow_html=True
     )
 
-    st.line_chart(close.rename("Closing Price"))
+    st.line_chart(close.rename("Adjusted Closing Price"))
 
 
 
