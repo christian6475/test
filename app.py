@@ -481,7 +481,8 @@ if page == "Performance":
             subset=["MAE ($)", "RMSE ($)", "MAPE (%)"],
             color="#1f6f5c"
         ),
-        width="stretch"
+        width="stretch",
+        column_config=centered_config(summary)
     )
 
     st.caption(
