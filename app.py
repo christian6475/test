@@ -230,6 +230,15 @@ with st.sidebar:
     )
 
 
+
+def centered_config(df):
+    return {
+        col: st.column_config.Column(alignment="center")
+        for col in df.columns
+    }
+
+
+
 if page == "Prediction":
 
     @st.cache_data(ttl=900)
@@ -383,9 +392,15 @@ if page == "Prediction":
     combined.index = combined.index.strftime("%Y-%m-%d")
     combined.index.name = "Date"
 
+    # st.dataframe(
+    #     combined.style.format("${:.2f}", na_rep="—"),
+    #     width="stretch"
+    # )
+
     st.dataframe(
         combined.style.format("${:.2f}", na_rep="—"),
-        width="stretch"
+        width="stretch",
+        column_config=centered_config(combined)
     )
 
     
